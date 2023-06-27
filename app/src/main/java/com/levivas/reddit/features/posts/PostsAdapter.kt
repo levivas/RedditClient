@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.levivas.reddit.R
 import com.levivas.reddit.application.models.Post
 import com.levivas.reddit.databinding.ItemPostBinding
 import com.levivas.reddit.extensions.setOnSafeClickListener
@@ -34,6 +35,8 @@ class PostsAdapter : PagingDataAdapter<Post, RecyclerView.ViewHolder>(COMPARATOR
             itemBinding.apply {
                 ivThumbnail.load(item?.thumbnail) {
                     transformations(RoundedCornersTransformation(20f))
+                    fallback(R.drawable.image_placeholder)
+                    error(R.drawable.image_placeholder)
                 }
                 tvTitle.text = item?.title
                 tvSubRedditName.text = item?.subRedditName
