@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/tvSubRedditName"
+        style="@style/FormattedTextBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sub reddit name" />
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        style="@style/FormattedTextRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Posted by Someone" />
+
+    <TextView
+        android:id="@+id/tvCreatedAt"
+        style="@style/FormattedTextRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAuthor"
+        tools:text="11 hours ago" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/FormattedTextSemibold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreatedAt"
+        tools:text="Title title title title" />
+
+    <ImageView
+        android:layout_marginHorizontal="8dp"
+        android:id="@+id/ivThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/post_thumbnail"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        style="@style/FormattedTextRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:textSize="14sp"
+        app:drawableEndCompat="@drawable/ic_arrow_down"
+        app:drawableStartCompat="@drawable/ic_arrow_up"
+        app:layout_constraintEnd_toStartOf="@+id/tvCommentsSize"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivThumbnail"
+        tools:text="Rating 500k" />
+
+    <TextView
+        android:id="@+id/tvCommentsSize"
+        style="@style/FormattedTextRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_comment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvScore"
+        app:layout_constraintTop_toBottomOf="@+id/ivThumbnail"
+        tools:text="Comment 500k" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
