@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 
 @JsonClass(generateAdapter = true)
 class PostDTO(
+    @Json(name = "name") val postId: String,
     val title: String,
     @Json(name = "subreddit_name_prefixed") val subRedditName: String?,
     @Json(name = "created") val date: LocalDateTime?,
@@ -33,5 +34,5 @@ class DataChildrenDTO(
 @JsonClass(generateAdapter = true)
 class DataChildrenItemDTO(
     var kind: String,
-    var data: PostDTO
+    var data: PostDTO,
 )

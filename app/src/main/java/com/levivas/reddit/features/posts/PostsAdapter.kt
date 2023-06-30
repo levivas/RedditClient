@@ -5,20 +5,16 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.RoundedCornersTransformation
-import com.levivas.reddit.R
 import com.levivas.reddit.application.models.Post
 import com.levivas.reddit.databinding.ItemPostBinding
 import com.levivas.reddit.extensions.setOnSafeClickListener
-import com.levivas.reddit.utils.POST_TEMPLATE_TIME_FORMAT
-import com.levivas.reddit.utils.openWithChromeTabs
-import java.time.format.DateTimeFormatter
+import com.levivas.reddit.extensions.showPost
 
-class PostsAdapter : PagingDataAdapter<Post, RecyclerView.ViewHolder>(COMPARATOR) {
+class PostsAdapter constructor(val onOpenPostDetailClick: (String, String) -> Unit) :
+    PagingDataAdapter<Post, RecyclerView.ViewHolder>(COMPARATOR) {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as? PostViewHolder)?.bind(item = getItem(position))
+        (holder as? PostViewHolder)?.bind(nullablePost = getItem(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -27,25 +23,16 @@ class PostsAdapter : PagingDataAdapter<Post, RecyclerView.ViewHolder>(COMPARATOR
         return PostViewHolder(itemBinding)
     }
 
-    class PostViewHolder(private val itemBinding: ItemPostBinding) :
+    inner class PostViewHolder(private val itemBinding: ItemPostBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        private val dateTimeFormatter = DateTimeFormatter.ofPattern(POST_TEMPLATE_TIME_FORMAT)
-
-        fun bind(item: Post?) {
-            itemBinding.apply {
-                ivThumbnail.load(item?.thumbnail) {
-                    transformations(RoundedCornersTransformation(20f))
-                    fallback(R.drawable.image_placeholder)
-                    error(R.drawable.image_placeholder)
-                }
-                tvTitle.text = item?.title
-                tvSubRedditName.text = item?.subRedditName
-                tvScore.text = item?.score.toString()
-                tvAuthor.text = item?.author
-                tvCreatedAt.text = item?.date?.format(dateTimeFormatter)
-                tvCommentsSize.text = item?.commentsSize.toString()
-                root.setOnSafeClickListener {
-                    it.context.openWithChromeTabs(item?.link)
+        fun bind(nullablePost: Post?) {
+            nullablePost?.let { post ->
+                itemBinding.apply {
+                    showPost(post)
+                    root.setOnSafeClickListener {
+                        onOpenPostDetailClick(post.postId, nullablePost.subRedditName)
+//                    it.context.openWithChromeTabs(item?.link)
+                    }
                 }
             }
         }

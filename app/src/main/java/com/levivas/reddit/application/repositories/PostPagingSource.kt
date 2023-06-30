@@ -11,10 +11,7 @@ import retrofit2.HttpException
 class PostPagingSource(private val postsCalls: PostsCalls) : PagingSource<String, Post>() {
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Post> {
         return try {
-            val response = when (params.key) {
-                null -> postsCalls.getInitialPosts(params.loadSize)
-                else -> postsCalls.getRestPosts(params.key.orEmpty(), params.loadSize)
-            }
+            val response = postsCalls.getRestPosts(params.loadSize, params.key)
             LoadResult.Page(
                 response.body()!!.data.children.map { it.data.mapToPost() },
                 prevKey = response.body()?.data?.before,

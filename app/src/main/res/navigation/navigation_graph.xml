@@ -10,4 +10,8 @@
         android:name="com.levivas.reddit.features.posts.PostsFragment"
         tools:layout="@layout/fragment_posts"/>
 
+    <fragment
+        android:id="@+id/fragmentPostDetail"
+        android:name="com.levivas.reddit.features.postDetail.PostDetailFragment"
+        tools:layout="@layout/item_post"/>
 </navigation>

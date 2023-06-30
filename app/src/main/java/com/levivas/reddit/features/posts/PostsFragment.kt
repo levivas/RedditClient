@@ -46,7 +46,7 @@ class PostsFragment : Fragment(R.layout.fragment_posts) {
     }
 
     private fun initAdapter() {
-        adapter = PostsAdapter()
+        adapter = PostsAdapter { postId, subredditNamePrefixed -> viewModel.onOpenPostDetailClick(postId, subredditNamePrefixed)}
     }
 
     private fun applyInsets() {

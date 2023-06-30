@@ -4,6 +4,7 @@ import com.levivas.reddit.utils.POST_TEMPLATE_TIME_FORMAT
 import java.time.format.DateTimeFormatter
 
 class Post(
+    val postId: String,
     val title: String,
     val subRedditName: String,
     val date: String,
@@ -18,6 +19,7 @@ private val dateTimeFormatter = DateTimeFormatter.ofPattern(POST_TEMPLATE_TIME_F
 
 fun PostDTO.mapToPost(): Post {
     return Post(
+        postId = this.postId,
         title = this.title,
         subRedditName = this.subRedditName.orEmpty(),
         date = this.date?.format(dateTimeFormatter).orEmpty(),
